@@ -1,6 +1,14 @@
 Question 1:
 
-I created an alias for "hdfs dfs" as "hfs", so the outputs will show that below.
+I created some aliases for hadoop in a previous class below to make the interface abit cleaner:
+
+# User specific aliases and functions
+HADOOP_EXE='/usr/bin/hadoop'
+HADOOP_LIBPATH='/opt/cloudera/parcels/CDH/lib'
+HADOOP_STREAMING='hadoop-mapreduce/hadoop-streaming.jar'
+
+alias hfs="$HADOOP_EXE fs"
+alias hjs="$HADOOP_EXE jar $HADOOP_LIBPATH/$HADOOP_STREAMING"
 
 ____________________________________________________________________________________
 a.) Issuing Commands
@@ -40,5 +48,93 @@ drwx------+  - rf1316 users          0 2019-06-04 20:32 .Trash
 drwxr-xr-x+  - rf1316 users          0 2019-05-12 21:36 .sparkStaging
 drwx------+  - rf1316 users          0 2019-02-25 23:11 .staging
 
+______________________________________________________________________
+Question d)
+
+commands executed on dumbo:
+
+hfs -put sample.txt
+
+hjs -file src/ -mapper src/max_temperature_map.py -reducer src/max_temperature_reduce.py -input sample.txt -output max_temp_out
 
 
+19/06/04 21:40:04 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: [src/] [/opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/jars/hadoop-streaming-2.6.0-cdh5.15.2.jar] /tmp/streamjob2675970658011807559.jar tmpDir=null
+19/06/04 21:40:06 INFO mapred.FileInputFormat: Total input paths to process : 1
+19/06/04 21:40:06 INFO mapreduce.JobSubmitter: number of splits:2
+19/06/04 21:40:06 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1551899815467_52865
+19/06/04 21:40:07 INFO impl.YarnClientImpl: Submitted application application_1551899815467_52865
+19/06/04 21:40:07 INFO mapreduce.Job: The url to track the job: http://babar.es.its.nyu.edu:8088/proxy/application_1551899815467_52865/
+19/06/04 21:40:07 INFO mapreduce.Job: Running job: job_1551899815467_52865
+19/06/04 21:40:12 INFO mapreduce.Job: Job job_1551899815467_52865 running in uber mode : false
+19/06/04 21:40:12 INFO mapreduce.Job:  map 0% reduce 0%
+19/06/04 21:40:16 INFO mapreduce.Job:  map 100% reduce 0%
+19/06/04 21:40:21 INFO mapreduce.Job:  map 100% reduce 94%
+19/06/04 21:40:22 INFO mapreduce.Job:  map 100% reduce 100%
+19/06/04 21:40:24 INFO mapreduce.Job: Job job_1551899815467_52865 completed successfully
+19/06/04 21:40:24 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=697
+		FILE: Number of bytes written=5368904
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=887
+		HDFS: Number of bytes written=17
+		HDFS: Number of read operations=102
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=64
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=32
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=19252
+		Total time spent by all reduces in occupied slots (ms)=425226
+		Total time spent by all map tasks (ms)=4813
+		Total time spent by all reduce tasks (ms)=70871
+		Total vcore-milliseconds taken by all map tasks=4813
+		Total vcore-milliseconds taken by all reduce tasks=70871
+		Total megabyte-milliseconds taken by all map tasks=19714048
+		Total megabyte-milliseconds taken by all reduce tasks=435431424
+	Map-Reduce Framework
+		Map input records=5
+		Map output records=5
+		Map output bytes=55
+		Map output materialized bytes=1081
+		Input split bytes=174
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=2
+		Reduce shuffle bytes=1081
+		Reduce input records=5
+		Reduce output records=2
+		Spilled Records=10
+		Shuffled Maps =64
+		Failed Shuffles=0
+		Merged Map outputs=64
+		GC time elapsed (ms)=1921
+		CPU time spent (ms)=46400
+		Physical memory (bytes) snapshot=14122409984
+		Virtual memory (bytes) snapshot=127186808832
+		Total committed heap usage (bytes)=41269854208
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=713
+	File Output Format Counters 
+		Bytes Written=17
+19/06/04 21:40:24 INFO streaming.StreamJob: Output directory: max_temp_out
+
+hfs -get max_temp_out
+
+cat max_temp_out/*
+
+1950	22
+1949	111
+
+We can see the correct result was achieved.
