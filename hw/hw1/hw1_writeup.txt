@@ -1,0 +1,44 @@
+Question 1:
+
+I created an alias for "hdfs dfs" as "hfs", so the outputs will show that below.
+
+____________________________________________________________________________________
+a.) Issuing Commands
+
+[rf1316@login-1-1 rbda]$ hfs -ls /
+Found 10 items
+drwxrwxrwx   - ak5688 supergroup          0 2016-08-17 15:01 /benchmarks
+drwx------   - hdfs   supergroup          0 2018-05-11 16:23 /dataset
+drwxr-xr-x   - hbase  hbase               0 2019-05-31 09:01 /hbase
+drwxr-xr-x   - hdfs   supergroup          0 2016-03-03 23:41 /lib
+drwxr-xr-x   - hdfs   supergroup          0 2019-02-26 01:35 /loudacre
+drwxrwxr-x   - solr   solr                0 2015-08-26 16:01 /solr
+drwxr-xr-x   - hdfs   supergroup          0 2018-07-17 10:29 /system
+drwxrwxrwt   - hdfs   supergroup          0 2019-05-08 23:34 /tmp
+drwx------   - hdfs   supergroup          0 2018-05-11 16:26 /tw1707
+drwxr-xr-x+  - hdfs   users               0 2019-06-04 18:20 /user
+
+[rf1316@login-1-1 rbda]$ hfs -ls
+Found 3 items
+drwx------+  - rf1316 users          0 2019-05-30 20:00 .Trash
+drwxr-xr-x+  - rf1316 users          0 2019-05-12 21:36 .sparkStaging
+drwx------+  - rf1316 users          0 2019-02-25 23:11 .staging
+
+[rf1316@login-1-1 rbda]$ hfs -mkdir myNewDir
+[rf1316@login-1-1 rbda]$ hfs -ls
+Found 4 items
+drwx------+  - rf1316 users          0 2019-05-30 20:00 .Trash
+drwxr-xr-x+  - rf1316 users          0 2019-05-12 21:36 .sparkStaging
+drwx------+  - rf1316 users          0 2019-02-25 23:11 .staging
+drwxr-xr-x+  - rf1316 users          0 2019-06-04 20:30 myNewDir
+
+[rf1316@login-1-1 rbda]$ hfs -rm -r myNewDir
+19/06/04 20:32:07 INFO fs.TrashPolicyDefault: Moved: 'hdfs://dumbo/user/rf1316/myNewDir' to trash at: hdfs://dumbo/user/rf1316/.Trash/Current/user/rf1316/myNewDir
+[rf1316@login-1-1 rbda]$ hfs -ls
+Found 3 items
+drwx------+  - rf1316 users          0 2019-06-04 20:32 .Trash
+drwxr-xr-x+  - rf1316 users          0 2019-05-12 21:36 .sparkStaging
+drwx------+  - rf1316 users          0 2019-02-25 23:11 .staging
+
+
+
