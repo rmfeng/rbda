@@ -27,4 +27,97 @@ Dec 2
 Chicago 1
 Java 0
 
+___________________________________________________________________________
+Question 6
+
+hjs -D mapred.reduce.tasks=1 -file src/ -mapper src/wc_mapper.per src/wc_reducer.py -input input.txt -output wc_out
+
+19/06/09 12:04:30 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: [src/] [/opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/jars/hadoop-streaming-2.6.0-cdh5.15.2.jar] /tmp/streamjob7710468526812861917.jar tmpDir=null
+19/06/09 12:04:31 INFO mapred.FileInputFormat: Total input paths to process : 1
+19/06/09 12:04:32 INFO mapreduce.JobSubmitter: number of splits:2
+19/06/09 12:04:32 INFO Configuration.deprecation: mapred.reduce.tasks is deprecated. Instead, use mapreduce.job.reduces
+19/06/09 12:04:33 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1551899815467_53292
+19/06/09 12:04:33 INFO impl.YarnClientImpl: Submitted application application_1551899815467_53292
+19/06/09 12:04:33 INFO mapreduce.Job: The url to track the job: http://babar.es.its.nyu.edu:8088/proxy/application_1551899815467_53292/
+19/06/09 12:04:33 INFO mapreduce.Job: Running job: job_1551899815467_53292
+19/06/09 12:04:37 INFO mapreduce.Job: Job job_1551899815467_53292 running in uber mode : false
+19/06/09 12:04:37 INFO mapreduce.Job:  map 0% reduce 0%
+19/06/09 12:04:42 INFO mapreduce.Job:  map 100% reduce 0%
+19/06/09 12:04:48 INFO mapreduce.Job:  map 100% reduce 100%
+19/06/09 12:04:50 INFO mapreduce.Job: Job job_1551899815467_53292 completed successfully
+19/06/09 12:04:50 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=58
+		FILE: Number of bytes written=473599
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=606
+		HDFS: Number of bytes written=28
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=19028
+		Total time spent by all reduces in occupied slots (ms)=21744
+		Total time spent by all map tasks (ms)=4757
+		Total time spent by all reduce tasks (ms)=3624
+		Total vcore-milliseconds taken by all map tasks=4757
+		Total vcore-milliseconds taken by all reduce tasks=3624
+		Total megabyte-milliseconds taken by all map tasks=19484672
+		Total megabyte-milliseconds taken by all reduce tasks=22265856
+	Map-Reduce Framework
+		Map input records=3
+		Map output records=5
+		Map output bytes=46
+		Map output materialized bytes=88
+		Input split bytes=172
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=3
+		Reduce shuffle bytes=88
+		Reduce input records=5
+		Reduce output records=3
+		Spilled Records=10
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=598
+		CPU time spent (ms)=11610
+		Physical memory (bytes) snapshot=2572083200
+		Virtual memory (bytes) snapshot=11208011776
+		Total committed heap usage (bytes)=4404019200
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=434
+	File Output Format Counters 
+		Bytes Written=28
+19/06/09 12:04:50 INFO streaming.StreamJob: Output directory: wc_out
+
+
+Results:
+
+getting the output from hfs:
+
+hfs -get wc_out
+
+
+checking the results:
+
+cat part-00000 
+
+Chicago	1
+Dec	2
+hackathon	2
+
 
