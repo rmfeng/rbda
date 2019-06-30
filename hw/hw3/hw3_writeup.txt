@@ -1,0 +1,102 @@
+Page Rank Implementation
+
+Please see the .py files included for the source code.
+
+We first test the code in python using:
+cat input.txt | python src/pr_mapper.py | sort | python src/pr_reducer.py
+
+We get the right result here:
+A C J 0.1166669
+B D E J 0.2000004
+C A B 0.2000004
+D A B C E J 0.0555556666667
+E J 0.0888890666667
+J B C 0.338889566667
+
+
+Next we run it on Hadoop on Dumbo:
+hjs -D mapred.reduce.tasks=1 -file src/ -mapper src/pr_mapper.sh -reducer src/pr_reducer.sh -input input.txt -output pr.out
+
+stdout:
+19/06/15 09:11:42 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+packageJobJar: [src/] [/opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/jars/hadoop-streaming-2.6.0-cdh5.15.2.jar] /tmp/streamjob2022482823477177252.jar tmpDir=null
+19/06/15 09:11:44 INFO mapred.FileInputFormat: Total input paths to process : 1
+19/06/15 09:11:45 INFO mapreduce.JobSubmitter: number of splits:2
+19/06/15 09:11:45 INFO Configuration.deprecation: mapred.reduce.tasks is deprecated. Instead, use mapreduce.job.reduces
+19/06/15 09:11:45 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1551899815467_54058
+19/06/15 09:11:45 INFO impl.YarnClientImpl: Submitted application application_1551899815467_54058
+19/06/15 09:11:45 INFO mapreduce.Job: The url to track the job: http://babar.es.its.nyu.edu:8088/proxy/application_1551899815467_54058/
+19/06/15 09:11:45 INFO mapreduce.Job: Running job: job_1551899815467_54058
+19/06/15 09:11:49 INFO mapreduce.Job: Job job_1551899815467_54058 running in uber mode : false
+19/06/15 09:11:49 INFO mapreduce.Job:  map 0% reduce 0%
+19/06/15 09:11:54 INFO mapreduce.Job:  map 100% reduce 0%
+19/06/15 09:11:59 INFO mapreduce.Job:  map 100% reduce 100%
+19/06/15 09:11:59 INFO mapreduce.Job: Job job_1551899815467_54058 completed successfully
+19/06/15 09:11:59 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=211
+		FILE: Number of bytes written=473899
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=316
+		HDFS: Number of bytes written=157
+		HDFS: Number of read operations=9
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=20028
+		Total time spent by all reduces in occupied slots (ms)=14490
+		Total time spent by all map tasks (ms)=5007
+		Total time spent by all reduce tasks (ms)=2415
+		Total vcore-milliseconds taken by all map tasks=5007
+		Total vcore-milliseconds taken by all reduce tasks=2415
+		Total megabyte-milliseconds taken by all map tasks=20508672
+		Total megabyte-milliseconds taken by all reduce tasks=14837760
+	Map-Reduce Framework
+		Map input records=6
+		Map output records=21
+		Map output bytes=281
+		Map output materialized bytes=235
+		Input split bytes=172
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=6
+		Reduce shuffle bytes=235
+		Reduce input records=21
+		Reduce output records=6
+		Spilled Records=42
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=643
+		CPU time spent (ms)=13100
+		Physical memory (bytes) snapshot=2567249920
+		Virtual memory (bytes) snapshot=11206520832
+		Total committed heap usage (bytes)=4417126400
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters
+		Bytes Read=144
+	File Output Format Counters
+		Bytes Written=157
+
+
+Final output:
+hfs -get pr.out
+
+[rf1316@login-1-1 hw3]$ cat pr.out/*
+A C J 0.1166669
+B D E J 0.20000040000000002
+C A B 0.20000040000000002
+D A B C E J 0.05555566666666667
+E J 0.08888906666666667
+J B C 0.3388895666666667
