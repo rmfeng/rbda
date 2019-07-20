@@ -28,9 +28,9 @@ def agg_handle_null(v1, v2, agg_fn):
         return agg_fn(v1, v2)
 
 
-def do_print(year, cur_dict):
+def do_print(key, cur_dict):
     """ prints the finished data summary"""
-    to_print = str(year)
+    to_print = str(key)
     for a_name in attrib_order:
         to_print += "," + str(cur_dict[a_name]['max'])
         to_print += "," + str(cur_dict[a_name]['min'])
