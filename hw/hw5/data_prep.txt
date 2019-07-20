@@ -57,7 +57,7 @@ To explore the data, we write some map reduce jobs to do the EDA, we first run o
 
 # running MR commands
 hjs -D mapred.reduce.tasks=1 -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input subset.txt -output avg_temp
-hjs -D mapred.reduce.tasks=1 -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input combined.txt -output avg_temp_full
+hjs -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input combined.txt -output avg_temp_full
 
 # output of the full dataset:
 

@@ -8,7 +8,8 @@ base_dict = {
     'min': None,
     'max': None,
     'sum': 0.,
-    'cnt': 0
+    'cnt': 0,
+    'cnt_null': 0
 }  # should never change
 attrib_order = ['temp', 'humid', 'pres', 'winddir', 'windspeed', 'skycond', 'precip1', 'precip6']
 cur_sum_dict = {}
@@ -35,6 +36,7 @@ def do_print(year, cur_dict):
         to_print += "," + str(cur_dict[a_name]['min'])
         to_print += "," + str(cur_dict[a_name]['sum'])
         to_print += "," + str(cur_dict[a_name]['cnt'])
+        to_print += "," + str(cur_dict[a_name]['cnt_null'])
     print(to_print)
 
 
@@ -73,6 +75,8 @@ for l in sys.stdin:
             cur_to_dict['max'] = agg_handle_null(cur_to_dict['max'], cur_v, max)
             cur_to_dict['sum'] += cur_v
             cur_to_dict['cnt'] += 1
+        else:
+            cur_to_dict['cnt_null'] += 1
 
     last_k = k
 
