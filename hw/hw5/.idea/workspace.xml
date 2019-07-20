@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0af64ff-b2b5-456d-8335-fbe8260f4fc9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/hw5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hw5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_prep.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data_prep.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edc_mapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/edc_mapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edc_reducer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/edc_reducer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edc_reducer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+            <state relative-caret-position="460">
+              <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -118,12 +114,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563586322501</updated>
-      <workItem from="1563586323677" duration="2917000" />
+      <workItem from="1563586323677" duration="3062000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2917000" />
+    <option name="totallyTimeSpent" value="3062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1543" y="109" width="1664" height="1123" extended-state="0" />
@@ -136,7 +132,7 @@
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32997987" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32997987" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -165,8 +161,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edc_reducer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+        <state relative-caret-position="460">
+          <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
         </state>
       </provider>
     </entry>

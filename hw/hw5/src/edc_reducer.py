@@ -70,7 +70,7 @@ for l in sys.stdin:
 
         if cur_v != -9999:
             cur_to_dict['min'] = agg_handle_null(cur_to_dict['min'], cur_v, min)
-            cur_to_dict['max'] = agg_handle_null(cur_to_dict['max'], cur_v, min)
+            cur_to_dict['max'] = agg_handle_null(cur_to_dict['max'], cur_v, max)
             cur_to_dict['sum'] += cur_v
             cur_to_dict['cnt'] += 1
 
