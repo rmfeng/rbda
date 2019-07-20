@@ -1,0 +1,19 @@
+The very long file is pretty standard on a per-line basis, each line looks similar to this:
+2019 06 29 21 227 65 10180 310 15 0 -9999 -9999 ./720997-99999-2019
+
+The fields are delimited by 1 or multiple spaces and goes as follows:
+- year - int
+- month - int
+- day - int
+- hour - int
+- temperature in degrees celsius - int - scaled by 10x
+- dew point temperature in degress celsius (measure of humidity) - int - scaled by 10x
+- sea level pressure in hectopascals - int - scaled by 10x
+- wind direction in angle clockwise from true north - int
+- wind speed in meters per second- int - scaled by 10x
+- sky condition in a 20point scale of overcast - int
+- 1 hour precip in mm - int - scaled by 10x
+- 6 hour precip in mm - int - scaled by 10x
+- station id - string - format is ./xxxxxx-zzzzz-yyyy,
+where xxxxxx is USAF id, zzzzz is WBAN id, yyyy is the year of the record
+xxxxxx-zzzz uniquely identifies a weather station
