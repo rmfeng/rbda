@@ -61,17 +61,64 @@ if we just run the MR on the full dataset with 1 key, the single reducer used be
 hjs -D mapred.reduce.tasks=1 -files src_raw/ -mapper src_raw/raw_mapper.sh -reducer src_raw/raw_reducer.sh -input subset.txt -output avg_temp
 hjs -files src_raw/ -mapper src_raw/raw_mapper.sh -reducer src_raw/raw_reducer.sh -input combined.txt -output avg_temp_full
 
-# sample output of the full dataset MR stage_1
+# sample output of the full dataset MR avg_temp_full
 # the None fields means that the min and max had no value because all of them were Null
 1903-10,122.0,-133.0,12458.0,557,0,None,None,0.0,0,557,10254.0,9710.0,5593569.0,556,1,360,0,90150.0,548,9,278.0,0.0,41029.0,548,9,8,0,3704.0,556,1,None,None,0.0,0,557,None,None,0.0,0,557	
 
-# we'll put the results of this stage_1 MR job back on to HDFS
-hfs -put stage_1
-
 # This is now on the year-month level, we roll it up 1 more time to get the full data exploration
-hjs -D mapred.reduce.tasks=1 -files src_reprocess/ -mapper src_reprocess/reprocess_mapper.sh -reducer src_reprocess/reprocess_reducer.sh -input stage_1 -output final_summary
+hjs -D mapreduce.job.reduces=1 -files src_reprocess/ -mapper src_reprocess/reprocess_mapper.sh -reducer src_reprocess/reprocess_reducer.sh -input avg_temp_full -output final_summary
+
+# results
+[rf1316@login-1-1 hw5]$ cat final_summary/*
 
 
+For column: temp	
+    max = 615.0	
+    min = -932.0	
+    cnt_null = 41536302.0	
+    Avg = 117.66547200243751	
+	
+For column: humid	
+    max = 368.0	
+    min = -980.0	
+    cnt_null = 140790025.0	
+    Avg = 59.01564783149305	
+	
+For column: pres	
+    max = 10900.0	
+    min = 8600.0	
+    cnt_null = 718971042.0	
+    Avg = 10149.443878160922	
+	
+For column: winddir	
+    max = 360.0	
+    min = 0.0	
+    cnt_null = 96552443.0	
+    Avg = 166.5454660565223	
+	
+For column: windspeed	
+    max = 900.0	
+    min = 0.0	
+    cnt_null = 47659739.0	
+    Avg = 35.44635269767021	
+	
+For column: skycond	
+    max = 10.0	
+    min = 0.0	
+    cnt_null = 697082305.0	
+    Avg = 4.350726129937573	
+	
+For column: precip1	
+    max = 9891.0	
+    min = -1.0	
+    cnt_null = 1849080691.0	
+    Avg = 1.4065063821074242	
+	
+For column: precip6	
+    max = 9809.0	
+    min = -1.0	
+    cnt_null = 1934689945.0	
+    Avg = 11.471244208036044	
 
 
 
