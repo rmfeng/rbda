@@ -19,16 +19,12 @@ for l in sys.stdin:
     precip6 = a[11]
     station_id = a[12]
 
-    print('%s-%s\t%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s' % (year,
-                                                       month,
-                                                       day,
-                                                       hour,
-                                                       temp,
-                                                       humid,
-                                                       pres,
-                                                       winddir,
-                                                       windspeed,
-                                                       skycond,
-                                                       precip1,
-                                                       precip6,
-                                                       station_id))
+    print('1\t%s,%s,%s,%s,%s,%s,%s,%s,%s' % (temp,
+                                             humid,
+                                             pres,
+                                             winddir,
+                                             windspeed,
+                                             skycond,
+                                             precip1,
+                                             precip6,
+                                             station_id))

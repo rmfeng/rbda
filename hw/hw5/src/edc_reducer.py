@@ -45,14 +45,14 @@ for l in sys.stdin:
 
     # parsing and casting the input
     cur_attribs = {
-        'temp': float(vl[2]),
-        'humid': float(vl[3]),
-        'pres': float(vl[4]),
-        'winddir': int(vl[5]),
-        'windspeed': float(vl[6]),
-        'skycond': int(vl[7]),
-        'precip1': float(vl[8]),
-        'precip6': float(vl[9]),
+        'temp': float(vl[0]),
+        'humid': float(vl[1]),
+        'pres': float(vl[2]),
+        'winddir': int(vl[3]),
+        'windspeed': float(vl[4]),
+        'skycond': int(vl[5]),
+        'precip1': float(vl[6]),
+        'precip6': float(vl[7]),
     }
 
     if last_k and last_k != k:
