@@ -53,13 +53,25 @@ drwx------+  - rf1316 users            0 2019-07-17 19:34 .staging
 -rw-r--r--+  3 rf1316 users       820000 2019-07-17 19:19 subset.txt
 
 
-To explore the data, we write some map reduce jobs to do the EDA, we first run on the subset.txt dataset to make sure we have all of the code right and then finally we run it on the full dataset (please see the included files for the mapper and reducer code): 
+To explore the data, we write some map reduce jobs to do the EDA, we first run on the subset.txt dataset to make sure we have all of the code right and then finally we run it on the full dataset (please see the included files for the mapper and reducer code)
 
-# running MR commands
-hjs -D mapred.reduce.tasks=1 -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input subset.txt -output avg_temp
-hjs -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input combined.txt -output avg_temp_full
+if we just run the MR on the full dataset with 1 key, the single reducer used becomes a bottle neck, so our strategy is to split the consolidation to 2 stages, the first stage will consolidate all of the data to the year-month level. Then the second stage will do another round of consolidation to get it to the full dataset level.
 
-# output of the full dataset:
+# running 1st stage MR commands
+hjs -D mapred.reduce.tasks=1 -files src_raw/ -mapper src_raw/raw_mapper.sh -reducer src_raw/raw_reducer.sh -input subset.txt -output avg_temp
+hjs -files src_raw/ -mapper src_raw/raw_mapper.sh -reducer src_raw/raw_reducer.sh -input combined.txt -output avg_temp_full
+
+# sample output of the full dataset MR stage_1
+# the None fields means that the min and max had no value because all of them were Null
+1903-10,122.0,-133.0,12458.0,557,0,None,None,0.0,0,557,10254.0,9710.0,5593569.0,556,1,360,0,90150.0,548,9,278.0,0.0,41029.0,548,9,8,0,3704.0,556,1,None,None,0.0,0,557,None,None,0.0,0,557	
+
+# we'll put the results of this stage_1 MR job back on to HDFS
+hfs -put stage_1
+
+# This is now on the year-month level, we roll it up 1 more time to get the full data exploration
+hjs -D mapred.reduce.tasks=1 -files src_reprocess/ -mapper src_reprocess/reprocess_mapper.sh -reducer src_reprocess/reprocess_reducer.sh -input stage_1 -output final_summary
+
+
 
 
 
