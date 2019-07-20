@@ -13,6 +13,22 @@ for l in sys.stdin:
     humid = a[5]
     pres = a[6]
     winddir = a[7]
-    wind
+    windspeed = a[8]
+    skycond = a[9]
+    precip1 = a[10]
+    precip6 = a[11]
+    station_id = a[12]
 
-    print('1\t%s' % (yr, mth, tp))
+    print('%s-%s\t%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s' % (year,
+                                                       month,
+                                                       day,
+                                                       hour,
+                                                       temp,
+                                                       humid,
+                                                       pres,
+                                                       winddir,
+                                                       windspeed,
+                                                       skycond,
+                                                       precip1,
+                                                       precip6,
+                                                       station_id))

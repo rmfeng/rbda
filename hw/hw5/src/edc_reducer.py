@@ -2,41 +2,79 @@
 
 import sys
 
+# initializations
 last_k = None
+base_dict = {
+    'min': None,
+    'max': None,
+    'sum': 0.,
+    'cnt': 0
+}  # should never change
+attrib_order = ['temp', 'humid', 'pres', 'winddir', 'windspeed', 'skycond', 'precip1', 'precip6']
+cur_sum_dict = {}
+for attrib_name in attrib_order:
+    cur_sum_dict[attrib_name] = base_dict.copy()
 
-cur_max = None
-cur_min = None
-cur_sum = 0.
-cur_cnt = 0
+
+# some helper functions
+def agg_handle_null(v1, v2, agg_fn):
+    """ handles the updates during the loop to the internal dict"""
+    if v1 is None:
+        return v2
+    elif v2 is None:
+        return v1
+    else:
+        return agg_fn(v1, v2)
+
+
+def do_print(year, cur_dict):
+    """ prints the finished data summary"""
+    to_print = str(year)
+    for a_name in attrib_order:
+        to_print += "," + str(cur_dict[a_name]['max'])
+        to_print += "," + str(cur_dict[a_name]['min'])
+        to_print += "," + str(cur_dict[a_name]['sum'])
+        to_print += "," + str(cur_dict[a_name]['cnt'])
+    print(to_print)
+
 
 for l in sys.stdin:
-    k, v = l.strip().split("\t")
-    v = float(v)
+    # reading the lines in
+    k, vs = l.strip().split("\t")
+    vl = vs.split(",")
+
+    # parsing and casting the input
+    cur_attribs = {
+        'temp': float(vl[2]),
+        'humid': float(vl[3]),
+        'pres': float(vl[4]),
+        'winddir': int(vl[5]),
+        'windspeed': float(vl[6]),
+        'skycond': int(vl[7]),
+        'precip1': float(vl[8]),
+        'precip6': float(vl[9]),
+    }
 
     if last_k and last_k != k:
-        print("%s, %s, %s, %s" % (k, cur_max, cur_min, cur_sum / cur_cnt))
+        do_print(last_k, cur_sum_dict)
 
         # resetting
-        cur_max = None
-        cur_min = None
-        cur_sum = 0.
-        cur_cnt = 0
+        cur_sum_dict = {}
+        for attrib_name in attrib_order:
+            cur_sum_dict[attrib_name] = base_dict.copy()
 
-    # if we have a null row, ignore it
-    if v != -9999:
-        cur_cnt += 1
-        if cur_max is None:
-            cur_max = v
-        else:
-            cur_max = max(v, cur_max)
+    # handling a new value
+    for attrib_name in attrib_order:
+        cur_v = cur_attribs[attrib_name]
+        cur_to_dict = cur_sum_dict[attrib_name]
 
-        if cur_min is None:
-            cur_min = v
-        else:
-            cur_min = min(v, cur_min)
-        cur_sum += v
+        if cur_v != -9999:
+            cur_to_dict['min'] = agg_handle_null(cur_to_dict['min'], cur_v, min)
+            cur_to_dict['max'] = agg_handle_null(cur_to_dict['max'], cur_v, min)
+            cur_to_dict['sum'] += cur_v
+            cur_to_dict['cnt'] += 1
 
     last_k = k
 
 if last_k:
-    print("%s, %s, %s, %s" % (k, cur_max, cur_min, cur_sum / cur_cnt))
+    do_print(last_k, cur_sum_dict)
