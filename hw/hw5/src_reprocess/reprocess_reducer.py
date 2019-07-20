@@ -20,12 +20,17 @@ for attrib_name in attrib_order:
 
 # some helper functions
 def do_print(cur_k, results_dict):
-    cur_line = cur_k
     for ca in attrib_order:
+        print("For column: %s" % ca)
         for cf in field_order:
-            cur_line += "," + str(results_dict[ca][cf])
-    print(cur_line)
-
+            cv = results_dict[ca][cf]
+            if cf in ('max', 'min', 'cnt_null'):
+                print("    %s = %s" % (cf, cv))
+        csum = results_dict[ca]['sum']
+        ccnt = results_dict[ca]['cnt']
+        if ccnt != 0:
+            print("    Avg = %s" % (csum / ccnt))
+        print("")
 
 def agg_handle_null(v1, v2, agg_fn):
     """ handles the updates during the loop to the internal dict"""

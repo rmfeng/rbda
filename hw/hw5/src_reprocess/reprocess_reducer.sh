@@ -2,4 +2,4 @@
 
 . /etc/profile.d/modules.sh
 module load python/gnu/3.6.5
-src/reprocess_reducer.py
+src_reprocess/reprocess_reducer.py
