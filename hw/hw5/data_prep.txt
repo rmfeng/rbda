@@ -53,14 +53,14 @@ drwx------+  - rf1316 users            0 2019-07-17 19:34 .staging
 -rw-r--r--+  3 rf1316 users       820000 2019-07-17 19:19 subset.txt
 
 
-To explore the data, we write some map reduce jobs to do the EDA, 
+To explore the data, we write some map reduce jobs to do the EDA, we first run on the subset.txt dataset to make sure we have all of the code right and then finally we run it on the full dataset (please see the included files for the mapper and reducer code): 
 
 # running MR commands
 hjs -D mapred.reduce.tasks=1 -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input subset.txt -output avg_temp
-
 hjs -D mapred.reduce.tasks=1 -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input combined.txt -output avg_temp_full
 
-hjs -files src/ -mapper src/edc_mapper.sh -reducer src/edc_reducer.sh -input subset.txt -output avg_temp
+# output of the full dataset:
+
 
 
 
