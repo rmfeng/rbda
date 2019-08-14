@@ -1,0 +1,64 @@
+Project Title: Finding Napa
+
+Project Description: (Write one paragraph to describe what this analytic will do.)
+
+Wine production has taken place in the famous Napa Valley for over 150 years, today wine from the region is known world-wide, and commends a premium compared to other US regions. With the advent of rapid climate change. The time-tested traditional methods of wine production has begun to change. Already farmers up and down the Valley are starting to plant different varietals as compared to the last 150 years.
+
+Outside of this valley, production is also booming in regions farther North, in Oregon and Washington. Which now have become just slightly warmer to see better vingtages coming out of that region grow in popularity. Despite wine production's traditionally unscientific nature, the qualtiy of grapes are governed by all that occurs above and below the soil line. As a result, this ambitious analytic seeks to identify other regions in the United States that have high similarity to Napa Valley below the soil line and have climate above the soil line that can be expected to change to that of Napa Vally in the early to mid 20th century.
+
+Describe who will benefit from your analytic:
+The study will be used to make land investments in these areas that can become the next large producers of world-famous wine.
+ 
+Describe how you will check the goodness of the analytic, i.e., how will you prove the results are accurate and can be trusted:
+Ultimately time will be able to tell whether the entire project was successful at identifying these potential wine regions. However, some of the data can be cross referenced. For example, weather data is available across various platforms through the NOAA, if time would allow we can cross check the ISD data below with data from other systems.
+
+## DS1 ##
+Data Source Description  (Provide a short description of the data source.)
+https://www.ncei.noaa.gov/data/global-hourly/
+
+ISD - Integrated Surface Data is weather data collected by the federal government with land-based weather stations across the United States.
+
+The data includes hourly information on wind, cloud, visibility, temperature, atmospheric pressure, precipitation, snow fall, snow accumulation, humidity
+
+The number of weather stations has grow over time, since 1901, so the size of the data has also grown. In 1901, the full year dataset is 79kb compressed, in 2018, the data was 4.5GB compressed
+
+Data Size  (Estimate size, e.g. MB, GB, TB?)
+The full data set is roughly 100GB compressed, probably under 1TB uncompressed
+ 
+### Data Collection Frequency ###
+Is the data source a static, periodic, or realtime (i.e., near realtime) source?
+The data is updated periodically, but the proposal will only look at static historical data
+
+If realtime data, what is the frequency with which you will collect the data and what is the volume of data collected at each interval?
+N/A
+
+If not realtime data, will you collect a batch of data periodically or just once (static)?
+Just once, we're interested in the history
+
+If the data will be collected periodically, how often will you collect it and what is the volume of data that will be collected at each interval?
+N/A
+
+### DS2 ###
+Data Source Description  (Provide a short description of the data source.)
+The USDA stores their survey data of all of the soil of the US in a database that is open to queries. The data contains geolocation data of the surveys as well as the results of the survey.
+
+https://sdmdataaccess.sc.egov.usda.gov/Default.aspx
+Information includes characteristics on the various layers (Horizons) of soil at that location.
+Characteristics include type of soil, consistency, fragmentation of soil, size and shape of the fragments, distribution of soil that pass through various sieves, sand content, clay content, moisture level, concentration of various chemicals, pH level of the water found, and much more information.
+
+Data Size  (Estimate size, e.g. MB, GB, TB?)
+
+The data size is obscured since the interface is via query, the time limit of 10mins per query prevents downloading all of the data at the same time. However, from their documentation, it looks like the coverage of the data is through out the United States. I would put the data in the GB range
+
+### Data Collection Frequency ###
+Is the data source a static, periodic, or realtime (i.e., near realtime) source?
+The data source is updated periodically, but we are interested in just a snap shot of the data.
+
+If realtime data, what is the frequency with which you will collect the data and what is the volume of data collected at each interval?
+N/A
+
+If not realtime data, will you collect a batch of data periodically or just once (static)?
+Just one time
+
+If the data will be collected periodically, how often will you collect it and what is the volume of data that will be collected at each interval?
+N/A

@@ -1,0 +1,24 @@
+1. In Step 4 of the Hive homework (red text), is there an unexpected result? If so, what is it and what is the reason for the result? 
+
+The last column was all null, even though its value in the raw file was +99999999999. The reason is because we specified that the column is int, and the actual raw value overflowed.
+ 
+
+2. In Step 3 of the Impala homework (red text):
+
+     a) Did you notice a difference in the time required to execute this command from Impala: 
+
+select distinct year from w11; 
+
+          Why do you think the timing of the second run of this command was faster?
+
+Impala must have built up a cache the first time, so on the 2nd run it can just serve up the cached values
+
+ 
+
+      b) Did you notice a difference in the time required to execute this command from Hive: 
+
+select distinct year from w1; 
+
+          Why do you think the timing of the second run of this command was not faster?
+
+I think Hive does the same thing both times and so both times are just as slow.
